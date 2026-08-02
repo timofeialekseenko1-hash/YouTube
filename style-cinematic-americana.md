@@ -20,8 +20,12 @@ no watermark, no gibberish text, no oversaturation, no plastic 3D render, no mod
 ## PRODUCTION
 - Stills: nano_banana_pro, 16:9, resolution 2k.
 - Motion: kling3_0_turbo (start_image push-in) or seedance for a hero. Because this style is realistic, keep motion GENTLE (slow push-in, parallax, subtle ambient movement) — avoid large character motion (uncanny + higher moderation risk).
-- Assembly: explainer_video 1920x1080. Voice: Roman (7e63ac18-5fcd-4aba-8078-a86d4e11c127) at NORMAL rate (omit speech_rate). Segment narration into ~24-word blocks so each fills its 10s window (smooth, no gaps).
-- 62-item assembler quirk workaround: if a full assembly drops a block, render in two halves and join.
+- Assembly: explainer_video 1920x1080. Voice: **Harrison (573e5163-59b3-4926-aab1-951ef2985f81)** at NORMAL rate (omit speech_rate) — locked as the Bozz Lab default. Segment narration into ~24-word blocks.
+- SMOOTHNESS / no-gaps rule (important): each block is a fixed 10s window. A take much SHORTER than 10s gets silence-padded = the "long pause / gap" the user dislikes; a take up to ~12.5s only gets a gentle pitch-safe speed-up (fine). So after voicing, AUDIT every take's durationSec and normalize into ~8.7–12.7s:
+  - Short takes (<~9s): re-voice with NEGATIVE speech_rate to fill the window (~-15 ≈ +1s, -20 ≈ +1.5s, -30 ≈ big stretch). Harrison reads fast, so short blocks are common — expect to fix several.
+  - Very long takes (>~13s): re-voice with speech_rate 30 to avoid a rushed sped-up sound. Mildly long (11–12.5s) is fine, leave it.
+  - TTS duration varies per re-roll (esp. number/date/em-dash lines) — verify after each re-voice.
+- 62-item assembler quirk workaround: if a full assembly drops a block, render in two halves and join. (24-item assemblies have been reliable.)
 
 ## APPROVED STYLE-TEST FRAMES (references)
 - Pickup / high-desert: faf4e245-200c-49cd-8edf-5830e17e2012
