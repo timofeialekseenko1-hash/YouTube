@@ -1,0 +1,22 @@
+{
+  "name": "stickman-explainer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Code-driven stickman explainer video pipeline (Remotion + ElevenLabs + ffmpeg)",
+  "type": "module",
+  "scripts": {
+    "tts": "node pipeline/1-tts.mjs",
+    "studio": "remotion studio",
+    "render": "node pipeline/2-render.mjs",
+    "assemble": "node pipeline/3-assemble.mjs",
+    "build": "npm run tts && npm run render && npm run assemble"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "ffmpeg-static": "^5.3.0",
+    "ffprobe-static": "^3.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290"
+  }
+}

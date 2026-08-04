@@ -1,0 +1,66 @@
+{
+  "title": "Why Most Startups Fail (Stickman Demo)",
+  "voice": {
+    "provider": "elevenlabs",
+    "voiceId": "REPLACE_WITH_YOUR_VOICE_ID",
+    "modelId": "eleven_multilingual_v2"
+  },
+  "scenes": [
+    {
+      "id": "s1-hook",
+      "narration": "Nine out of ten startups fail. But not for the reason you think.",
+      "caption": "9 out of 10 startups fail.",
+      "bg": "#f2e2a8",
+      "floor": "#b9b9b9",
+      "figures": [
+        { "verb": "wave", "x": 960, "talk": true, "seed": 3,
+          "face": { "gazeX": 0, "gazeY": -0.1, "brow": 0.4, "mouth": "smile" } }
+      ]
+    },
+    {
+      "id": "s2-idea",
+      "narration": "It starts the same way every time. One founder, one idea, and a lot of confidence.",
+      "caption": "One founder. One idea.",
+      "bg": "#e7ddc4",
+      "floor": "#b3b3b3",
+      "figures": [
+        { "verb": "walk", "from": 360, "to": 1480, "cycles": 4, "color": "#1c1c1c", "talk": true, "seed": 5,
+          "face": { "gazeX": 0.4, "brow": 0.2, "mouth": "neutral" } }
+      ]
+    },
+    {
+      "id": "s3-growth",
+      "narration": "For a while, the chart only goes up. Users, revenue, hype.",
+      "caption": "For a while, everything goes up.",
+      "bg": "#dfe6d8",
+      "floor": "#b3b3b3",
+      "figures": [
+        { "verb": "point", "x": 620, "talk": true, "seed": 7,
+          "face": { "gazeX": 0.6, "gazeY": 0.1, "brow": 0.8, "mouth": "smile" } }
+      ],
+      "prop": { "type": "chart", "x": 1080, "y": 886, "color": "#e0533d" }
+    },
+    {
+      "id": "s4-truth",
+      "narration": "Then reality hits. They built something nobody actually needed.",
+      "caption": "Nobody actually needed it.",
+      "bg": "#efd9d6",
+      "floor": "#b0b0b0",
+      "figures": [
+        { "verb": "shrug", "x": 960, "color": "#7a2b2b", "talk": true, "seed": 2,
+          "face": { "gazeX": 0, "gazeY": 0.2, "brow": -1, "mouth": "frown" } }
+      ]
+    },
+    {
+      "id": "s5-lesson",
+      "narration": "The winners? They talked to customers first. Simple. Boring. And it works.",
+      "caption": "Talk to customers first.",
+      "bg": "#d8ecdd",
+      "floor": "#b0b0b0",
+      "figures": [
+        { "verb": "jump", "x": 960, "color": "#1c6340", "talk": true, "seed": 4,
+          "face": { "gazeX": 0, "gazeY": -0.2, "brow": 1, "mouth": "smile" } }
+      ]
+    }
+  ]
+}
