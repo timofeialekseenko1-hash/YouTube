@@ -2,24 +2,24 @@
   "fps": 30,
   "real": false,
   "frames": [
-    160,
-    193,
-    138,
-    116,
-    149
+    214,
+    214,
+    203,
+    225,
+    214
   ],
   "seconds": [
-    5.327,
-    6.418,
-    4.6,
-    3.873,
-    4.964
+    7.145,
+    7.145,
+    6.782,
+    7.509,
+    7.145
   ],
   "audio": [
-    "out/audio/s1-hook.mp3",
-    "out/audio/s2-idea.mp3",
-    "out/audio/s3-growth.mp3",
-    "out/audio/s4-truth.mp3",
-    "out/audio/s5-lesson.mp3"
+    "out/audio/s1-before-money.mp3",
+    "out/audio/s2-looking.mp3",
+    "out/audio/s3-printer.mp3",
+    "out/audio/s4-chart.mp3",
+    "out/audio/s5-groceries.mp3"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "title": "Why Most Startups Fail (Stickman Demo)",
+  "title": "The Dollar Story (Stickman Still Demo)",
   "voice": {
     "provider": "elevenlabs",
     "voiceId": "REPLACE_WITH_YOUR_VOICE_ID",
@@ -7,59 +7,82 @@
   },
   "scenes": [
     {
-      "id": "s1-hook",
-      "narration": "Nine out of ten startups fail. But not for the reason you think.",
-      "caption": "9 out of 10 startups fail.",
-      "bg": "#f2e2a8",
-      "floor": "#b9b9b9",
-      "figures": [
-        { "verb": "wave", "x": 960, "talk": true, "seed": 3,
-          "face": { "gazeX": 0, "gazeY": -0.1, "brow": 0.4, "mouth": "smile" } }
+      "id": "s1-before-money",
+      "narration": "Long before banks or dollars, people lived simply. They built, they farmed, and they traded whatever they had.",
+      "title": "Before Money",
+      "titleColor": "#141414",
+      "bg": "#f6c9b4",
+      "floor": "#a9c0a0",
+      "floorAt": 0.8,
+      "props": [
+        { "type": "hut", "x": 170, "w": 330 },
+        { "type": "hut", "x": 760, "w": 330, "smoke": true },
+        { "type": "hut", "x": 1300, "w": 300 },
+        { "type": "tree", "x": 1790, "h": 360 }
       ]
     },
     {
-      "id": "s2-idea",
-      "narration": "It starts the same way every time. One founder, one idea, and a lot of confidence.",
-      "caption": "One founder. One idea.",
-      "bg": "#e7ddc4",
-      "floor": "#b3b3b3",
+      "id": "s2-looking",
+      "narration": "For a hundred years, economists searched for the perfect kind of money. They studied, measured, and looked everywhere.",
+      "title": "100 Years of Looking",
+      "bg": "#ffffff",
+      "floor": "#c8a86a",
+      "floorAt": 0.9,
       "figures": [
-        { "verb": "walk", "from": 360, "to": 1480, "cycles": 4, "color": "#1c1c1c", "talk": true, "seed": 5,
-          "face": { "gazeX": 0.4, "brow": 0.2, "mouth": "neutral" } }
+        { "verb": "stride", "x": 820, "seed": 5,
+          "acc": { "hat": "pith", "holdRight": "magnifier" },
+          "face": { "gazeX": 0.4, "gazeY": 0.05, "brow": 0.2, "mouth": "neutral" } }
       ]
     },
     {
-      "id": "s3-growth",
-      "narration": "For a while, the chart only goes up. Users, revenue, hype.",
-      "caption": "For a while, everything goes up.",
-      "bg": "#dfe6d8",
-      "floor": "#b3b3b3",
+      "id": "s3-printer",
+      "narration": "Eventually, governments found the easiest answer of all. If you need more money, you simply print it.",
+      "bg": "#ffffff",
+      "floor": "#8f8f8f",
+      "floorAt": 0.78,
       "figures": [
-        { "verb": "point", "x": 620, "talk": true, "seed": 7,
-          "face": { "gazeX": 0.6, "gazeY": 0.1, "brow": 0.8, "mouth": "smile" } }
+        { "verb": "reachDown", "x": 620, "seed": 8,
+          "acc": { "tie": true },
+          "face": { "gazeX": 0.4, "gazeY": 0.15, "brow": 0, "mouth": "neutral" } }
       ],
-      "prop": { "type": "chart", "x": 1080, "y": 886, "color": "#e0533d" }
-    },
-    {
-      "id": "s4-truth",
-      "narration": "Then reality hits. They built something nobody actually needed.",
-      "caption": "Nobody actually needed it.",
-      "bg": "#efd9d6",
-      "floor": "#b0b0b0",
-      "figures": [
-        { "verb": "shrug", "x": 960, "color": "#7a2b2b", "talk": true, "seed": 2,
-          "face": { "gazeX": 0, "gazeY": 0.2, "brow": -1, "mouth": "frown" } }
+      "props": [
+        { "type": "printer", "x": 1000, "y": 828, "w": 440 },
+        { "type": "bill", "x": 1200, "y": 720, "w": 120, "rot": -15, "seed": 1 },
+        { "type": "bill", "x": 1360, "y": 630, "w": 120, "rot": 22, "seed": 2 },
+        { "type": "bill", "x": 1520, "y": 560, "w": 120, "rot": -12, "seed": 3 },
+        { "type": "bill", "x": 1440, "y": 460, "w": 120, "rot": 26, "seed": 4 },
+        { "type": "bill", "x": 1620, "y": 430, "w": 120, "rot": -22, "seed": 5 }
       ]
     },
     {
-      "id": "s5-lesson",
-      "narration": "The winners? They talked to customers first. Simple. Boring. And it works.",
-      "caption": "Talk to customers first.",
-      "bg": "#d8ecdd",
-      "floor": "#b0b0b0",
+      "id": "s4-chart",
+      "narration": "For decades the dollar held its value. Then, in 1971, its link to gold was cut, and everything changed.",
+      "bg": "#ffffff",
+      "props": [
+        { "type": "chart", "x": 320, "y": 900, "w": 1240, "h": 660, "left": "1971", "right": "2008" }
+      ]
+    },
+    {
+      "id": "s5-groceries",
+      "narration": "The same dollar that once filled a grocery bag now barely buys a single apple. That is inflation.",
+      "bg": "#ffffff",
+      "floor": "#9a9a9a",
+      "floorAt": 0.82,
       "figures": [
-        { "verb": "jump", "x": 960, "color": "#1c6340", "talk": true, "seed": 4,
-          "face": { "gazeX": 0, "gazeY": -0.2, "brow": 1, "mouth": "smile" } }
+        { "verb": "carry", "x": 680, "seed": 3,
+          "face": { "gazeX": 0.1, "brow": 0.1, "mouth": "smile" } },
+        { "verb": "carry", "x": 1360, "seed": 7,
+          "face": { "gazeX": -0.05, "gazeY": 0.15, "brow": -0.3, "mouth": "frown" } }
+      ],
+      "props": [
+        { "type": "bag", "x": 575, "y": 560, "w": 210, "full": true, "seed": 6, "front": true },
+        { "type": "bag", "x": 1285, "y": 610, "w": 130, "full": false, "seed": 9, "front": true }
+      ],
+      "labels": [
+        { "text": "$1", "x": 850, "y": 540, "size": 96, "marker": true },
+        { "text": "1971", "x": 838, "y": 660, "size": 78 },
+        { "text": "$1", "x": 1600, "y": 540, "size": 96, "marker": true },
+        { "text": "TODAY", "x": 1560, "y": 660, "size": 78 }
       ]
     }
   ]

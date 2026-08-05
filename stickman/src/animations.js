@@ -105,5 +105,41 @@ export function blend(a, b, mix = 0.5) {
   return out;
 }
 
+// ---- Static poses (for still frames — no time dependence) ------------------
+
+// Plain standing.
+export function stand() { return {}; }
+
+// Mid-stride walking freeze (like the reference walkers).
+export function stride() {
+  return {
+    lHip: -26, lKnee: -2,
+    rHip: 24, rKnee: 26,
+    lShoulder: -30, lElbow: -4,
+    rShoulder: 22, rElbow: 10,
+    lean: 5,
+  };
+}
+
+// Right arm reaching down-forward (e.g. pressing a button).
+export function reachDown() {
+  return {
+    rShoulder: 60, rElbow: 18,
+    lShoulder: -18,
+    lHip: -22, rHip: 20, rKnee: 20,
+    lean: 6,
+  };
+}
+
+// Carrying something in front with both arms (grocery bag).
+export function carry() {
+  return {
+    lShoulder: 34, lElbow: 60,
+    rShoulder: -34, rElbow: -60,
+    lHip: -24, rHip: 22, rKnee: 22,
+    lean: 4,
+  };
+}
+
 // Registry so scenes can reference a verb by name from script.json.
-export const VERBS = { idle, walk, point, wave, jump, shrug };
+export const VERBS = { idle, walk, point, wave, jump, shrug, stand, stride, reachDown, carry };

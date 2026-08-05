@@ -11,6 +11,8 @@
  * +x (screen right).
  */
 
+import { PithHelmet, Tie, MagnifyingGlass } from './props.jsx';
+
 const DEG = Math.PI / 180;
 
 // Segment lengths (px). Big head + long legs = the reference silhouette.
@@ -126,8 +128,15 @@ export function StickFigure({ pose, color }) {
       {limb(lElbow, lHand, 'lfa', 8)}
       {limb(shoulder, rElbow, 'rua', 9)}
       {limb(rElbow, rHand, 'rfa', 10)}
+      {/* tie (under the head, over the torso) */}
+      {p.acc?.tie && <Tie x={shoulder[0]} y={shoulder[1] + 4} len={torso * 0.5} color={p.acc.tieColor || '#1c1c1c'} />}
       {/* head + face */}
       <Head cx={headC[0]} cy={headC[1]} r={headR} squash={headSquash} color={c} seed={p.seed} face={face} />
+      {/* hat sits on the head */}
+      {p.acc?.hat === 'pith' && <PithHelmet cx={headC[0]} cy={headC[1] - headR * 0.32} r={headR * 0.98} />}
+      {/* held prop in a hand */}
+      {p.acc?.holdRight === 'magnifier' && <MagnifyingGlass x={rHand[0] + 6} y={rHand[1]} r={headR * 0.62} angle={-24} />}
+      {p.acc?.holdLeft === 'magnifier' && <MagnifyingGlass x={lHand[0] - 6} y={lHand[1]} r={headR * 0.62} angle={24} />}
     </g>
   );
 }
