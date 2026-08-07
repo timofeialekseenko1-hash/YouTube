@@ -19,7 +19,14 @@ no watermark, no gibberish text, no oversaturation, no plastic 3D render, no mod
 
 ## PRODUCTION
 - Stills: nano_banana_pro, 16:9, resolution 2k.
-- Motion: kling3_0_turbo (start_image push-in) or seedance for a hero. Because this style is realistic, keep motion GENTLE (slow push-in, parallax, subtle ambient movement) — avoid large character motion (uncanny + higher moderation risk).
+- Motion (UPDATED 2026-08-07 per user): push-ins alone are TOO STATIC. Every animated scene must have visible movement to hold the viewer. Push-in is a baseline to combine with, never the whole shot.
+  MOTION PALETTE — pick 1 camera move + 1+ ambient/subject motion per animated shot:
+   * Camera (beyond push-in): lateral dolly/truck (track past foreground), crane up/down, tilt, slow orbit/arc around a subject, pull-out reveal, parallax dolly (foreground vs background at different speeds), gentle handheld drift.
+   * Ambient/environmental (SAFE, use liberally): drifting dust & haze, smoke/steam/exhaust, blowing fabric/flags/curtains, falling leaves/snow/rain, rippling water/reflections, flickering light, sun breaking through, passing cars, headlights, birds, embers, crowd shuffle.
+   * Subject motion: people walking, hands working, turning to look, a figure crossing the foreground. Adds life + parallax.
+  REALISM GUARDRAILS (still true — manage, don't avoid, motion): lean on camera + ambient motion for energy since they never morph faces. Reserve larger BODY motion for figures at mid/wide distance or seen from behind/side; avoid big motion on tight face close-ups (uncanny + moderation risk). Keep prompt tail "photographic, no morphing, no warping, faces preserved."
+   * For a hero/high-energy shot that needs dynamic subject motion at quality, prefer seedance (1080p, handles motion better) over kling turbo.
+  SYNERGY w/ hybrid style: since ~2/3 of scenes are held stills now, the animated 1/3 carry all the energy — make them the MOST kinetic shots (a real camera move + layered ambient motion), not gentle push-ins.
 - Assembly: explainer_video 1920x1080. Voice: **Harrison (573e5163-59b3-4926-aab1-951ef2985f81)** at NORMAL rate (omit speech_rate) — locked as the Bozz Lab default. Segment narration into ~24-word blocks.
 - SMOOTHNESS / no-gaps rule (important): each block is a fixed 10s window. A take much SHORTER than 10s gets silence-padded = the "long pause / gap" the user dislikes; a take up to ~12.5s only gets a gentle pitch-safe speed-up (fine). So after voicing, AUDIT every take's durationSec and normalize into ~8.7–12.7s:
   - Short takes (<~9s): re-voice with NEGATIVE speech_rate to fill the window (~-15 ≈ +1s, -20 ≈ +1.5s, -30 ≈ big stretch). Harrison reads fast, so short blocks are common — expect to fix several.
