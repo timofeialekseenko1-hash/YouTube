@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, OffthreadVideo, Sequence, staticFile } from "remotion";
-import { PART1_FRAMES, sec } from "./theme";
+import { PART2_FRAMES, sec } from "./theme";
 import { Captions } from "./components/Captions";
 import { Vignette } from "./components/Overlays";
 import {
@@ -33,12 +33,12 @@ const gfx: { from: number; dur: number; el: React.ReactNode; name: string }[] = 
 export const Main: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#05060a" }}>
-      {/* Base footage: part 1 then part 2, carrying the voice-over audio. */}
-      <Sequence from={0} durationInFrames={PART1_FRAMES}>
-        <OffthreadVideo src={staticFile("part1.mp4")} />
-      </Sequence>
-      <Sequence from={PART1_FRAMES}>
+      {/* Base footage: part 2 (gru21) then part 1 (gru11), carrying the VO. */}
+      <Sequence from={0} durationInFrames={PART2_FRAMES}>
         <OffthreadVideo src={staticFile("part2.mp4")} />
+      </Sequence>
+      <Sequence from={PART2_FRAMES}>
+        <OffthreadVideo src={staticFile("part1.mp4")} />
       </Sequence>
 
       <Vignette />
