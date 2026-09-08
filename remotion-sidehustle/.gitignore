@@ -4,3 +4,4 @@ out/
 # Large source footage + rendered output are delivered separately, not in git.
 public/part1.mp4
 public/part2.mp4
+public/ai_super.mp4
