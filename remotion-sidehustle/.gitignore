@@ -1,0 +1,6 @@
+node_modules/
+out/
+.remotion/
+# Large source footage + rendered output are delivered separately, not in git.
+public/part1.mp4
+public/part2.mp4

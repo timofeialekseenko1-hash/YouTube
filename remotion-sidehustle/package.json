@@ -1,0 +1,20 @@
+{
+  "name": "remotion-sidehustle",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "remotion studio",
+    "render": "remotion render Main out/video.mp4"
+  },
+  "dependencies": {
+    "@remotion/google-fonts": "4.0.522",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.522"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.522",
+    "@types/react": "19.2.0",
+    "typescript": "5.9.2"
+  }
+}
