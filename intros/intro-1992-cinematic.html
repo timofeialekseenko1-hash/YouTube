@@ -10,19 +10,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   /* ============================================================
-     LAYER FILES (drop these PNGs next to this HTML, in /intros):
-       plate.png   – storm sky + capitol building (16:9, hero plate)
-       peace.png   – molten-gold peace symbol on PURE BLACK (1:1)
-       embers.png  – gold embers/sparks on PURE BLACK (16:9, optional)
+     LAYER FILES (kept next to this HTML, in /intros):
+       plate.jpg   – storm sky + capitol building (hero plate)
+       peace.jpg   – molten-gold peace symbol on PURE BLACK
+       embers.jpg  – gold embers/sparks on PURE BLACK
      Everything else (motion, "1992", grain, vignette) is done here.
      ============================================================ */
   :root{
-    /* --- master timeline (seconds) — tweak freely --- */
-    --t-black:1.1;      /* hold on black                    */
-    --t-plate:2.2;      /* plate fade-in duration           */
-    --t-ignite:1.7;     /* ignition delay (peace appears)   */
-    --t-rise:2.7;       /* peace rise+grow duration         */
-    --t-title:4.7;      /* "1992" appears                   */
+    /* --- master timeline (seconds) — tweak freely (keep the s unit) --- */
+    --t-black:1.1s;     /* hold on black                    */
+    --t-plate:2.2s;     /* plate fade-in duration           */
+    --t-ignite:1.7s;    /* ignition delay (peace appears)   */
+    --t-rise:2.7s;      /* peace rise+grow duration         */
+    --t-title:4.7s;     /* "1992" appears                   */
     --title-color:#f2e8cf;
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -52,7 +52,7 @@
             mask-image:linear-gradient(to bottom,#000 0%,#000 34%,transparent 60%);
     animation:driftIn var(--t-plate) ease-out var(--t-black) forwards,
               drift 46s linear var(--t-black) infinite alternate}
-  @keyframes driftIn{to{opacity:.35}}
+  @keyframes driftIn{to{opacity:.22}}
   @keyframes drift{from{transform:translate3d(0,0,0) scale(1.06)}
                    to{transform:translate3d(-3.5%,0,0) scale(1.06)}}
 
@@ -65,25 +65,29 @@
     animation:underglow 6s ease-out calc(var(--t-ignite) + .1s) forwards}
   @keyframes underglow{0%{opacity:0}45%{opacity:1}100%{opacity:.75}}
 
-  /* ---------- PEACE SYMBOL (fire on black → screen blend) ---------- */
-  #peaceWrap{position:absolute;left:50%;top:52%;translate:-50% -50%;
-    width:34%;aspect-ratio:1/1;mix-blend-mode:screen;
-    transform-origin:50% 60%;opacity:0;
+  /* ---------- PEACE SYMBOL (fire on black → screen blend) ----------
+     The JPEG is opaque, so: crush the near-black floor with contrast() so
+     screen-blend adds nothing outside the fire (kills the rectangle), and
+     get the glow from the baked-in bloom rather than a rectangular shadow. */
+  #peaceWrap{position:absolute;left:50%;top:56%;translate:-50% -50%;
+    width:56%;aspect-ratio:16/9;mix-blend-mode:screen;
+    transform-origin:50% 58%;opacity:0;
     animation:peaceRise var(--t-rise) cubic-bezier(.22,.68,.24,1) var(--t-ignite) forwards}
-  #peace{width:100%;height:100%;object-fit:contain;
-    filter:drop-shadow(0 0 26px rgba(255,150,40,.75)) drop-shadow(0 0 60px rgba(255,110,20,.45));
+  #peace{width:100%;height:100%;object-fit:cover;
+    filter:contrast(1.5) brightness(1.04) saturate(1.08);
     animation:flicker 2.4s ease-in-out calc(var(--t-ignite) + 1s) infinite}
   @keyframes peaceRise{
-    0%  {opacity:0;transform:translateY(46%) scale(.10)}
+    0%  {opacity:0;transform:translateY(42%) scale(.12)}
     18% {opacity:1}
     100%{opacity:1;transform:translateY(0) scale(1)}
   }
-  @keyframes flicker{0%,100%{filter:drop-shadow(0 0 24px rgba(255,150,40,.7)) drop-shadow(0 0 55px rgba(255,110,20,.4))}
-    35%{filter:drop-shadow(0 0 34px rgba(255,175,55,.95)) drop-shadow(0 0 80px rgba(255,120,25,.6))}
-    65%{filter:drop-shadow(0 0 20px rgba(255,140,35,.6)) drop-shadow(0 0 48px rgba(255,100,20,.35))}}
+  @keyframes flicker{0%,100%{filter:contrast(1.5) brightness(1.02) saturate(1.08)}
+    35%{filter:contrast(1.5) brightness(1.2) saturate(1.12)}
+    65%{filter:contrast(1.5) brightness(.94) saturate(1.06)}}
 
   /* ---------- EMBERS (on black → screen blend), drift up ---------- */
   #embers{mix-blend-mode:screen;opacity:0;transform:translateY(4%) scale(1.05);
+    filter:contrast(1.5) brightness(1.05);
     animation:embersIn 3s ease-out calc(var(--t-ignite) + .6s) forwards,
               embersUp 22s linear calc(var(--t-ignite) + .6s) infinite}
   @keyframes embersIn{to{opacity:.7}}
@@ -91,7 +95,7 @@
                       to{transform:translateY(-6%) scale(1.05)}}
 
   /* ---------- "1992" TITLE ---------- */
-  .title{position:absolute;left:0;right:0;top:26%;text-align:center;
+  .title{position:absolute;left:0;right:0;top:22%;text-align:center;
     font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;
     font-size:9vw;letter-spacing:.16em;text-indent:.16em;color:var(--title-color);
     text-shadow:0 2px 34px rgba(255,170,40,.4),0 0 3px rgba(0,0,0,.6);
@@ -122,11 +126,11 @@
 <body>
   <div id="stage">
     <div class="world">
-      <img id="plate"  class="layer" src="plate.png"  alt="" />
-      <img id="drift"  class="layer" src="plate.png"  alt="" />
+      <img id="plate"  class="layer" src="plate.jpg"  alt="" />
+      <img id="drift"  class="layer" src="plate.jpg"  alt="" />
       <div id="underglow"></div>
-      <img id="embers" class="layer" src="embers.png" alt="" onerror="this.style.display='none'" />
-      <div id="peaceWrap"><img id="peace" src="peace.png" alt="" /></div>
+      <img id="embers" class="layer" src="embers.jpg" alt="" onerror="this.style.display='none'" />
+      <div id="peaceWrap"><img id="peace" src="peace.jpg" alt="" /></div>
     </div>
 
     <div class="title">1992</div>
