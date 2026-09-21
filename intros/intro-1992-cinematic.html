@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>1992 Intro — Cinematic</title>
+<meta name="description" content="Layered cinematic recreation of the '1992' title intro: storm-lit capitol plate, molten peace symbol, embers, and title reveal." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     LAYER FILES (drop these PNGs next to this HTML, in /intros):
+       plate.png   – storm sky + capitol building (16:9, hero plate)
+       peace.png   – molten-gold peace symbol on PURE BLACK (1:1)
+       embers.png  – gold embers/sparks on PURE BLACK (16:9, optional)
+     Everything else (motion, "1992", grain, vignette) is done here.
+     ============================================================ */
+  :root{
+    /* --- master timeline (seconds) — tweak freely --- */
+    --t-black:1.1;      /* hold on black                    */
+    --t-plate:2.2;      /* plate fade-in duration           */
+    --t-ignite:1.7;     /* ignition delay (peace appears)   */
+    --t-rise:2.7;       /* peace rise+grow duration         */
+    --t-title:4.7;      /* "1992" appears                   */
+    --title-color:#f2e8cf;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#000;overflow:hidden}
+  body{display:flex;align-items:center;justify-content:center;
+       font-family:"Cormorant Garamond",Georgia,serif;color:#fff}
+
+  /* 16:9 stage, fits any viewport, vector overlays stay crisp at 4K */
+  #stage{position:relative;width:100vw;height:56.25vw;
+         max-height:100vh;max-width:177.78vh;background:#000;overflow:hidden}
+
+  .layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ---------- CAMERA PUSH-IN (whole scene) ---------- */
+  .world{position:absolute;inset:0;transform-origin:50% 60%;
+         animation:push 9.5s cubic-bezier(.25,.6,.3,1) forwards}
+  @keyframes push{from{transform:scale(1.02)}to{transform:scale(1.13)}}
+
+  /* ---------- PLATE (sky + capitol) fade from black ---------- */
+  #plate{opacity:0;animation:fadeIn var(--t-plate) ease-out var(--t-black) forwards}
+  @keyframes fadeIn{to{opacity:1}}
+
+  /* ---------- CLOUD DRIFT: duplicate of the plate, masked to the sky,
+       screen-blended and slowly panned to make the storm move ---------- */
+  #drift{opacity:0;mix-blend-mode:screen;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 34%,transparent 60%);
+            mask-image:linear-gradient(to bottom,#000 0%,#000 34%,transparent 60%);
+    animation:driftIn var(--t-plate) ease-out var(--t-black) forwards,
+              drift 46s linear var(--t-black) infinite alternate}
+  @keyframes driftIn{to{opacity:.35}}
+  @keyframes drift{from{transform:translate3d(0,0,0) scale(1.06)}
+                   to{transform:translate3d(-3.5%,0,0) scale(1.06)}}
+
+  /* ---------- WARM UNDERGLOW that swells at ignition ---------- */
+  #underglow{position:absolute;left:50%;bottom:2%;translate:-50% 0;
+    width:46%;height:60%;pointer-events:none;opacity:0;
+    background:radial-gradient(60% 70% at 50% 100%,
+      rgba(255,150,45,.55),rgba(255,120,30,.18) 45%,transparent 72%);
+    mix-blend-mode:screen;
+    animation:underglow 6s ease-out calc(var(--t-ignite) + .1s) forwards}
+  @keyframes underglow{0%{opacity:0}45%{opacity:1}100%{opacity:.75}}
+
+  /* ---------- PEACE SYMBOL (fire on black → screen blend) ---------- */
+  #peaceWrap{position:absolute;left:50%;top:52%;translate:-50% -50%;
+    width:34%;aspect-ratio:1/1;mix-blend-mode:screen;
+    transform-origin:50% 60%;opacity:0;
+    animation:peaceRise var(--t-rise) cubic-bezier(.22,.68,.24,1) var(--t-ignite) forwards}
+  #peace{width:100%;height:100%;object-fit:contain;
+    filter:drop-shadow(0 0 26px rgba(255,150,40,.75)) drop-shadow(0 0 60px rgba(255,110,20,.45));
+    animation:flicker 2.4s ease-in-out calc(var(--t-ignite) + 1s) infinite}
+  @keyframes peaceRise{
+    0%  {opacity:0;transform:translateY(46%) scale(.10)}
+    18% {opacity:1}
+    100%{opacity:1;transform:translateY(0) scale(1)}
+  }
+  @keyframes flicker{0%,100%{filter:drop-shadow(0 0 24px rgba(255,150,40,.7)) drop-shadow(0 0 55px rgba(255,110,20,.4))}
+    35%{filter:drop-shadow(0 0 34px rgba(255,175,55,.95)) drop-shadow(0 0 80px rgba(255,120,25,.6))}
+    65%{filter:drop-shadow(0 0 20px rgba(255,140,35,.6)) drop-shadow(0 0 48px rgba(255,100,20,.35))}}
+
+  /* ---------- EMBERS (on black → screen blend), drift up ---------- */
+  #embers{mix-blend-mode:screen;opacity:0;transform:translateY(4%) scale(1.05);
+    animation:embersIn 3s ease-out calc(var(--t-ignite) + .6s) forwards,
+              embersUp 22s linear calc(var(--t-ignite) + .6s) infinite}
+  @keyframes embersIn{to{opacity:.7}}
+  @keyframes embersUp{from{transform:translateY(6%) scale(1.05)}
+                      to{transform:translateY(-6%) scale(1.05)}}
+
+  /* ---------- "1992" TITLE ---------- */
+  .title{position:absolute;left:0;right:0;top:26%;text-align:center;
+    font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;
+    font-size:9vw;letter-spacing:.16em;text-indent:.16em;color:var(--title-color);
+    text-shadow:0 2px 34px rgba(255,170,40,.4),0 0 3px rgba(0,0,0,.6);
+    opacity:0;transform:scale(1.06);pointer-events:none;will-change:opacity,transform;
+    animation:titleIn 1.6s cubic-bezier(.2,.7,.3,1) var(--t-title) forwards,
+              titleOut 1.1s ease-in 8.2s forwards}
+  @keyframes titleIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+  @keyframes titleOut{to{opacity:0}}
+
+  /* ---------- grade: vignette + grain ---------- */
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(120% 92% at 50% 54%,transparent 40%,rgba(0,0,0,.5) 80%,rgba(0,0,0,.92) 100%)}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:overlay}
+
+  /* fallback if plate.png is missing, so the stage isn't just white */
+  #plate,#drift{background:#05070c}
+
+  #ui{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+    display:flex;gap:10px;z-index:20;font-family:system-ui,sans-serif;
+    opacity:0;transition:opacity .4s;pointer-events:none}
+  #ui.show{opacity:.9;pointer-events:auto}
+  #ui button{background:rgba(20,20,26,.85);color:#f0e6cf;
+    border:1px solid rgba(255,190,70,.35);padding:8px 16px;border-radius:999px;
+    font-size:13px;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px)}
+  #ui button:hover{border-color:rgba(255,190,70,.8);color:#fff}
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div class="world">
+      <img id="plate"  class="layer" src="plate.png"  alt="" />
+      <img id="drift"  class="layer" src="plate.png"  alt="" />
+      <div id="underglow"></div>
+      <img id="embers" class="layer" src="embers.png" alt="" onerror="this.style.display='none'" />
+      <div id="peaceWrap"><img id="peace" src="peace.png" alt="" /></div>
+    </div>
+
+    <div class="title">1992</div>
+    <div class="vignette"></div>
+
+    <!-- animated film grain -->
+    <svg class="grain" width="100%" height="100%">
+      <filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch">
+        <animate attributeName="seed" from="1" to="40" dur="0.7s" repeatCount="indefinite"/></feTurbulence>
+        <feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#g)"/>
+    </svg>
+  </div>
+
+  <div id="ui">
+    <button id="replay">↻ Replay</button>
+    <button id="loop">Loop: Off</button>
+  </div>
+
+<script>
+  const stage=document.getElementById('stage');
+  const sel='.world,#plate,#drift,#underglow,#peaceWrap,#peace,#embers,.title';
+  function play(){stage.querySelectorAll(sel).forEach(el=>{
+    el.style.animation='none';void el.offsetWidth;el.style.animation='';});}
+  document.getElementById('replay').addEventListener('click',play);
+
+  let looping=false,timer=null;
+  const loopBtn=document.getElementById('loop');
+  loopBtn.addEventListener('click',()=>{looping=!looping;
+    loopBtn.textContent='Loop: '+(looping?'On':'Off');
+    if(looping){timer&&clearInterval(timer);timer=setInterval(()=>looping&&play(),9800);}
+    else if(timer){clearInterval(timer);timer=null;}});
+
+  // auto-hide controls for clean screen-recording
+  const ui=document.getElementById('ui');let h=null;
+  addEventListener('mousemove',()=>{ui.classList.add('show');clearTimeout(h);
+    h=setTimeout(()=>ui.classList.remove('show'),2200);});
+</script>
+</body>
+</html>
